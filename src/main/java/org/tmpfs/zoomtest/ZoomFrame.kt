@@ -8,15 +8,13 @@ import android.view.ScaleGestureDetector
 import android.view.View
 import android.widget.FrameLayout
 
-class ZoomFrame : FrameLayout {
-    private val gestureDetector: GestureDetector
-    private val scaleDetector: ScaleGestureDetector
+class ZoomFrame @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
+        FrameLayout(context, attrs, defStyleAttr) {
+    private val gestureDetector = GestureDetector(context, GestureListener())
+    private val scaleDetector = ScaleGestureDetector(context, ScaleListener())
 
-    @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0)
-    : super(context, attrs, defStyleAttr) {
-        gestureDetector = GestureDetector(context, GestureListener())
-        scaleDetector = ScaleGestureDetector(context, ScaleListener())
-    }
+    private val firstChild: View
+        get() = getChildAt(0)
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         var result = scaleDetector.onTouchEvent(event)
@@ -26,13 +24,8 @@ class ZoomFrame : FrameLayout {
         return result
     }
 
-    private val firstChild: View
-        get() = getChildAt(0)
-
     private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
-        override fun onDown(e: MotionEvent?): Boolean {
-            return true
-        }
+        override fun onDown(e: MotionEvent?): Boolean = true
 
         override fun onScroll(e1: MotionEvent?, e2: MotionEvent?, distanceX: Float, distanceY: Float): Boolean {
             firstChild.translationX -= distanceX
