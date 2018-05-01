@@ -2,8 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 buildscript {
-    ext.kotlin_version = '1.2.20'
-    ext.support_version = '26.1.0'
+    ext.kotlin_version = '1.2.41'
+    ext.support_version = '27.1.1'
 
     repositories {
         jcenter()
@@ -12,20 +12,20 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.1.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
     }
 }
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 27
     buildToolsVersion "27.0.3"
 
     defaultConfig {
         applicationId "org.tmpfs.zoomtest"
         minSdkVersion 14
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
     }
@@ -45,6 +45,6 @@ repositories {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    compile "com.android.support:appcompat-v7:$support_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "com.android.support:appcompat-v7:$support_version"
 }
